@@ -1,0 +1,5 @@
+classification:
+  num_classes: 2
+  threshold: 0.5
+
+report_generation:
