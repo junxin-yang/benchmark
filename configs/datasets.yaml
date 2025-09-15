@@ -3,30 +3,17 @@ TCGA_BRCA:
   labels_csv: "labels.csv"
   reports_dir: "reports/"
   preprocessed_dir: "preprocessed/"
-  supported_tasks: ["classification", "report_generation", "survival_prediction"]
-  sample_rate: 1.0
-  batch_size: 8
-  num_workers: 4
-  shuffle: false
+
 
 Camelyon16:
   data_root: "/data/Camelyon16/"
   labels_csv: "labels.csv"
   reports_dir: null
   preprocessed_dir: "preprocessed/"
-  supported_tasks: ["classification"]
-  sample_rate: 1.0
-  batch_size: 8
-  num_workers: 4
-  shuffle: false
 
-CustomDataset: # 你的数据集名称
+
+CustomDataset: # 自定义数据集名称
   data_root: "/data/CustomDataset/"
   labels_csv: null # 如果没有标签，设置为 null
   reports_dir: null # 如果没有报告，设置为 null
   preprocessed_dir: null # 如果没有预处理数据，设置为 null
-  supported_tasks: ["classification"]
-  sample_rate: 1.0
-  batch_size: 8 # 批处理大小
-  num_workers: 4 # 数据加载的工作线程数
-  shuffle: false # 是否在每个epoch打乱数据

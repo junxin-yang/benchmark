@@ -1,0 +1,88 @@
+{
+  "Classification": {
+    "models": [
+      "UNI",
+      "PRISM",
+      "TITAN",
+      "CONCH"
+    ],
+    "metrics": [
+      "AUC",
+      "ROC"
+    ],
+    "dataset": [
+      {
+        "name": "TCGA_BRCA",
+        "root_dir": "/path/to/TCGA-BRCA",
+        "num_classes": 2,
+        "threshold": 0.5
+      },
+      {
+        "name": "CAMELYON16",
+        "root_dir": "/path/to/CAMELYON16",
+        "num_classes": 3,
+        "threshold": 0.5
+      },
+      {
+        "name": "CUSTOM_DATASET",
+        "root_dir": "/path/to/CUSTOM_DATASET",
+        "num_classes": 6,
+        "threshold": 0.5
+      }
+    ]
+  },
+  "ReportGeneration": {
+    "models": [
+      "UNI",
+      "PRISM"
+    ],
+    "metrics": [
+      "BLEU"
+    ],
+    "dataset": [
+      {
+        "name": "TCGA_BRCA",
+        "root_dir": "/path/to/TCGA-BRCA"
+      },
+      {
+        "name": "CAMELYON16",
+        "root_dir": "/path/to/CAMELYON16"
+      },
+      {
+        "name": "CUSTOM_DATASET",
+        "root_dir": "/path/to/CUSTOM_DATASET"
+      }
+    ]
+  },
+  "SurvivalPrediction": {
+    "models": [
+      "UNI",
+      "PRISM",
+      "TITAN",
+      "CONCH"
+    ],
+    "time_horizon": 5,
+    "event_column": "event",
+    "time_column": "survival_time",
+    "metrics": [
+      "c_index"
+    ],
+    "dataset": [
+      {
+        "name": "TCGA_BRCA",
+        "root_dir": "/path/to/TCGA-BRCA",
+        "num_classes": 2
+      },
+      {
+        "name": "CAMELYON16",
+        "root_dir": "/path/to/CAMELYON16",
+        "num_classes": 2
+      },
+      {
+        "name": "CUSTOM_DATASET",
+        "root_dir": "/path/to/CUSTOM_DATASET",
+        "num_classes": 2
+      }
+    ]
+  }
+}

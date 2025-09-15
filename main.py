@@ -1,51 +1,85 @@
 import yaml
+import json
 from models import CONCH, UNI, PRISM, TITAN
 from datasets import Camelyon16, TCGA_BRCA, CustomDataset
 from tasks import WSIClassificationTask, ReportGenerationTask, SurvivalPredictionTask
 
 def main():
-    # 加载配置
+    # 加载配置文件
+    with open('configs/config.json', 'r') as f:
+        config = json.load(f)
+    
     with open('configs/models.yaml', 'r') as f:
         model_configs = yaml.safe_load(f)
+    
     with open('configs/datasets.yaml', 'r') as f:
         dataset_configs = yaml.safe_load(f)
-    with open('configs/tasks.yaml', 'r') as f:
-        task_configs = yaml.safe_load(f)
-    
-    # 初始化任务
-    tasks = {
-        'classification': WSIClassificationTask(),
-        'report_generation': ReportGenerationTask(),
-        'survival_prediction': SurvivalPredictionTask()
+
+    # 任务映射字典，将配置中的任务名映射到对应的任务类
+    task_mapping = {
+        'Classification': WSIClassificationTask,
+        'ReportGeneration': ReportGenerationTask,
+        'SurvivalPrediction': SurvivalPredictionTask
     }
-    
-    # 初始化模型
-    models = {
-        'CONCH': CONCH(**model_configs['CONCH']),
-        'UNI': UNI(**model_configs['UNI']),
-        'Prism': PRISM(**model_configs['Prism']),
-        'TITAN': TITAN(**model_configs['TITAN'])
+
+    # 数据集映射字典
+    dataset_mapping = {
+        'TCGA_BRCA': TCGA_BRCA,
+        'CAMELYON16': Camelyon16,
+        'CUSTOM_DATASET': CustomDataset
     }
-    
-    # 初始化数据集
-    datasets = {
-        'CAMELYON16': Camelyon16(**dataset_configs['Camelyon16']),
-        'TCGA_BRCA': TCGA_BRCA(**dataset_configs['TCGA_BRCA']),
-        'CustomDataset': CustomDataset(**dataset_configs['CustomDataset'])
+
+    # 模型映射字典
+    model_mapping = {
+        'UNI': UNI,
+        'PRISM': PRISM,
+        'TITAN': TITAN,
+        'CONCH': CONCH
     }
-    
-    # 一键式循环测试
-    for task_name, task in tasks.items():
-        for model_name, model in models.items():
-            for dataset_name, dataset in datasets.items():
-                print(f"Evaluating {model_name} on {dataset_name} for {task_name}...")
+
+    # 第一层循环：遍历所有任务
+    for task_name, task_config in config.items():
+        print(f"\n=== 开始处理任务: {task_name} ===")
+        
+        # 获取当前任务的模型列表
+        task_models = task_config['models']
+        # 获取当前任务的数据集列表
+        task_datasets = task_config['dataset']
+        
+        # 第二层循环：遍历当前任务的所有模型
+        for model_name in task_models:
+            print(f"\n--- 使用模型: {model_name} ---")
+            
+            # 第三层循环：遍历当前任务的所有数据集
+            for dataset_info in task_datasets:
+                dataset_name = dataset_info['name']
+                print(f"\n处理数据集: {dataset_name}")
                 
-                # 执行评估
-                metrics, predictions, figures = task.evaluate(model, dataset)
-                
-                # 保存结果
-                task.save_results(model_name, dataset_name, metrics, predictions, figures)
-                
+                try:
+                    # 初始化模型
+                    model_class = model_mapping[model_name]
+                    model = model_class(model_configs[model_name])
+                    
+                    # 初始化数据集
+                    dataset_class = dataset_mapping[dataset_name]
+                    dataset = dataset_class(dataset_info, dataset_configs[dataset_name])
+                    
+                    # 初始化任务
+                    task_class = task_mapping[task_name]
+                    task = task_class(model, dataset, task_config)
+                    
+                    # 执行任务
+                    results = task.execute()
+                    
+                    # 输出结果
+                    print(f"任务 {task_name} - 模型 {model_name} - 数据集 {dataset_name} 完成")
+                    print(f"结果: {results}")
+                    
+                except Exception as e:
+                    print(f"错误: 任务 {task_name} - 模型 {model_name} - 数据集 {dataset_name} 执行失败: {str(e)}")
+                    continue
+
+    print("\n=== 所有任务处理完成 ===")
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,5 @@
-Prism:
-  weight_path: "path/to/your/prism/weights.pth"
+PRISM:
+  model_path: "path/to/your/prism/"
   segmenter: "hest"
   mag: 20
   patch_size: 224
@@ -8,16 +8,16 @@ Prism:
   slide_encoder: "prism"
 
 CONCH:
-  weight_path: "path/to/your/conch/weights.pth"
+  model_path: "path/to/your/conch/"
   model_param1: value1
   model_param2: value2
 
 UNI:
-  weight_path: "path/to/your/uni/weights.pth"
+  model_path: "path/to/your/uni/"
   model_param1: value1
   model_param2: value2
 
 TITAN:
-  weight_path: "path/to/your/titan/weights.pth"
+  model_path: "path/to/your/titan/"
   model_param1: value1
   model_param2: value2
