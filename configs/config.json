@@ -10,26 +10,34 @@
       "AUC",
       "ROC"
     ],
-    "dataset": [
+    "datasets": [
       {
         "name": "TCGA_BRCA",
         "root_dir": "/path/to/TCGA-BRCA",
-        "num_classes": 2,
-        "threshold": 0.5
+        "configs": {
+          "num_classes": 2,
+          "threshold": 0.5
+        }
       },
       {
         "name": "CAMELYON16",
         "root_dir": "/path/to/CAMELYON16",
-        "num_classes": 3,
-        "threshold": 0.5
+        "configs": {
+          "num_classes": 3,
+          "threshold": 0.5
+        }
       },
       {
         "name": "CUSTOM_DATASET",
         "root_dir": "/path/to/CUSTOM_DATASET",
-        "num_classes": 6,
-        "threshold": 0.5
+        "configs": {
+          "num_classes": 5,
+          "threshold": 0.5
+        }
       }
-    ]
+    ],
+    "result_dir": "results/",
+    "fig_dir": "figures/"
   },
   "ReportGeneration": {
     "models": [
@@ -39,7 +47,7 @@
     "metrics": [
       "BLEU"
     ],
-    "dataset": [
+    "datasets": [
       {
         "name": "TCGA_BRCA",
         "root_dir": "/path/to/TCGA-BRCA"
@@ -52,7 +60,9 @@
         "name": "CUSTOM_DATASET",
         "root_dir": "/path/to/CUSTOM_DATASET"
       }
-    ]
+    ],
+    "result_dir": "results/",
+    "fig_dir": "figures/"
   },
   "SurvivalPrediction": {
     "models": [
@@ -67,22 +77,33 @@
     "metrics": [
       "c_index"
     ],
-    "dataset": [
+    "datasets": [
       {
         "name": "TCGA_BRCA",
         "root_dir": "/path/to/TCGA-BRCA",
-        "num_classes": 2
+        "configs": {
+          "num_classes": 2,
+          "time_horizon": 5
+        }
       },
       {
         "name": "CAMELYON16",
         "root_dir": "/path/to/CAMELYON16",
-        "num_classes": 2
+        "configs": {
+          "num_classes": 2,
+          "time_horizon": 5
+        }
       },
       {
         "name": "CUSTOM_DATASET",
         "root_dir": "/path/to/CUSTOM_DATASET",
-        "num_classes": 2
+        "configs": {
+          "num_classes": 2,
+          "time_horizon": 5
+        }
       }
-    ]
+    ],
+    "result_dir": "results/",
+    "fig_dir": "figures/"
   }
 }

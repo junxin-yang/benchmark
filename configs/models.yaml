@@ -6,18 +6,22 @@ PRISM:
   overlap: 0
   patch_encoder: "virchow"
   slide_encoder: "prism"
+  device: "cuda"
 
 CONCH:
   model_path: "path/to/your/conch/"
   model_param1: value1
   model_param2: value2
+  device: "cuda"
 
 UNI:
   model_path: "path/to/your/uni/"
   model_param1: value1
   model_param2: value2
+  device: "cuda"
 
 TITAN:
   model_path: "path/to/your/titan/"
   model_param1: value1
   model_param2: value2
+  device: "cuda"

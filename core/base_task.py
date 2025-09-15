@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import os
+import numpy as np
 import json
 from typing import Dict, Any
 from .base_model import BaseModel
@@ -24,16 +25,13 @@ class BaseTask(ABC):
         task_dir = os.path.join(self.output_root, self.task_name)
         model_dir = os.path.join(task_dir, model_name)
         dataset_dir = os.path.join(model_dir, dataset_name)
-        figures_dir = os.path.join(dataset_dir, 'figures')
-        os.makedirs(figures_dir, exist_ok=True)
         
         metrics_path = os.path.join(dataset_dir, 'metrics.json')
         with open(metrics_path, 'w') as f:
             json.dump(metrics, f, indent=4)
             
         if predictions is not None:
-            pred_path = os.path.join(dataset_dir, 'predictions.csv')
-            if hasattr(predictions, 'to_csv'):
-                predictions.to_csv(pred_path)
+            pred_path = os.path.join(dataset_dir, 'predictions.npy')
+            np.save(pred_path, predictions.cpu().numpy() if hasattr(predictions, 'cpu') else predictions)
                 
         print(f"Results saved to: {dataset_dir}")

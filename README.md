@@ -4,7 +4,7 @@
     ├── configs/               # 配置文件目录
     │   ├── models.yaml       # 模型配置（路径、参数）
     │   ├── datasets.yaml     # 数据集配置（路径、预处理）
-    │   └── tasks.yaml        # 任务配置（评估指标、参数）
+    │   └── config.json        # 任务配置
     │
     ├── core/                 # 核心模块
     │   ├── __init__.py
@@ -24,7 +24,7 @@
     │   ├── __init__.py
     │   ├── tcga.py
     │   ├── camelyon16.py
-    │   └── your_custom_data.py
+    │   └── custom_data.py
     │
     ├── tasks/                # 具体任务（继承 base_task）
     │   ├── __init__.py
