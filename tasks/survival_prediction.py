@@ -3,9 +3,8 @@ from core.base_model import BaseModel
 from core.base_dataset import BaseDataset
 
 class SurvivalPredictionTask(BaseTask):
-    def __init__(self, metrics: list, output_root="results"):
-        super().__init__(task_name="survival_prediction", output_root=output_root)
-        self.metrics = metrics
+    def __init__(self, task_name: str, metrics: list, output_root="results"):
+        super().__init__(task_name=task_name, metrics=metrics, output_root=output_root)
 
     def evaluate(self, model: BaseModel, dataset: BaseDataset, **kwargs):
         all_preds = []
@@ -14,7 +13,7 @@ class SurvivalPredictionTask(BaseTask):
 
         # 遍历数据集
         for feature, label in dataset:
-            pred = model.survival_predict(feature, kwargs["time_horizon"])
+            pred = model.survival_predict(feature, kwargs.get("time_horizon"))
             all_preds.append(pred)
             all_labels.append(label)
         

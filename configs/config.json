@@ -7,13 +7,12 @@
       "CONCH"
     ],
     "metrics": [
-      "AUC",
-      "ROC"
+      "ACC",
+      "AUC"
     ],
     "datasets": [
       {
         "name": "TCGA_BRCA",
-        "root_dir": "/path/to/TCGA-BRCA",
         "configs": {
           "num_classes": 2,
           "threshold": 0.5
@@ -21,17 +20,15 @@
       },
       {
         "name": "CAMELYON16",
-        "root_dir": "/path/to/CAMELYON16",
         "configs": {
-          "num_classes": 3,
+          "num_classes": 2,
           "threshold": 0.5
         }
       },
       {
         "name": "CUSTOM_DATASET",
-        "root_dir": "/path/to/CUSTOM_DATASET",
         "configs": {
-          "num_classes": 5,
+          "num_classes": 2,
           "threshold": 0.5
         }
       }
@@ -41,24 +38,21 @@
   },
   "ReportGeneration": {
     "models": [
-      "UNI",
-      "PRISM"
+      "PRISM",
+      "TITAN"
     ],
     "metrics": [
       "BLEU"
     ],
     "datasets": [
       {
-        "name": "TCGA_BRCA",
-        "root_dir": "/path/to/TCGA-BRCA"
+        "name": "TCGA_BRCA"
       },
       {
-        "name": "CAMELYON16",
-        "root_dir": "/path/to/CAMELYON16"
+        "name": "CAMELYON16"
       },
       {
-        "name": "CUSTOM_DATASET",
-        "root_dir": "/path/to/CUSTOM_DATASET"
+        "name": "CUSTOM_DATASET"
       }
     ],
     "result_dir": "results/",
@@ -75,12 +69,12 @@
     "event_column": "event",
     "time_column": "survival_time",
     "metrics": [
-      "c_index"
+      "c_index",
+      "AUC_Survival"
     ],
     "datasets": [
       {
         "name": "TCGA_BRCA",
-        "root_dir": "/path/to/TCGA-BRCA",
         "configs": {
           "num_classes": 2,
           "time_horizon": 5
@@ -88,7 +82,6 @@
       },
       {
         "name": "CAMELYON16",
-        "root_dir": "/path/to/CAMELYON16",
         "configs": {
           "num_classes": 2,
           "time_horizon": 5
@@ -96,7 +89,6 @@
       },
       {
         "name": "CUSTOM_DATASET",
-        "root_dir": "/path/to/CUSTOM_DATASET",
         "configs": {
           "num_classes": 2,
           "time_horizon": 5

@@ -10,8 +10,7 @@
     │   ├── __init__.py
     │   ├── base_model.py    # 模型基类（统一接口）
     │   ├── base_dataset.py  # 数据集基类（统一接口）
-    │   ├── base_task.py     # 任务基类（核心）
-    │   └── evaluator.py     # 评估指标计算
+    │   └── base_task.py     # 任务基类（核心）
     │
     ├── models/               # 模型实现（继承 base_model）
     │   ├── __init__.py
@@ -36,10 +35,28 @@
     │   ├── __init__.py
     │   ├── logger.py         # 日志记录
     │   ├── visualizer.py     # 结果可视化（绘图）
-    │   └── file_utils.py     # 文件操作辅助
+    │   ├── file_utils.py     # 文件操作辅助
+    |   └── metrics.py
     │
     ├── results/              # 结果根目录（自动生成）
     │   ├── classification/
+    |   |   ├──CONCH
+    |   |   |   ├──CAMELYON16
+    |   |   |   |   ├──metrics.json
+    |   |   |   |   └──predictions.json
+    │   ├── report_generation/
+    │   └── survival_prediction/
+    |
+    |── figures/               # 图片生成根目录
+    |   ├── classification/
+    |   |   ├──ACC
+    |   |   |  ├──CAMELYON16.png
+    |   |   |  ├──CUSTOM_DATASET.png
+    |   |   |  └──TCGA_BRCA.png
+    |   |   ├──AUC
+    |   |   |  ├──CAMELYON16.png
+    |   |   |  ├──CUSTOM_DATASET.png
+    |   |   |  └──TCGA_BRCA.png
     │   ├── report_generation/
     │   └── survival_prediction/
     │

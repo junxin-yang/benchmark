@@ -3,9 +3,8 @@ from core.base_model import BaseModel
 from core.base_dataset import BaseDataset
 
 class ReportGenerationTask(BaseTask):
-    def __init__(self, metrics: list, output_root="results"):
-        super().__init__(task_name="report_generation", output_root=output_root)
-        self.metrics = metrics
+    def __init__(self, task_name: str, metrics: list, output_root="results"):
+        super().__init__(task_name=task_name, metrics=metrics, output_root=output_root)
 
     def evaluate(self, model: BaseModel, dataset: BaseDataset, **kwargs):
         all_preds = []

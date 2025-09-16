@@ -1,15 +1,10 @@
-import numpy as np
-from sklearn.metrics import accuracy_score, roc_auc_score
-import matplotlib.pyplot as plt
 from core.base_task import BaseTask
 from core.base_model import BaseModel
 from core.base_dataset import BaseDataset
-from torch.utils.data import DataLoader
 
 class ClassificationTask(BaseTask):
-    def __init__(self, metrics: list, output_root="results"):
-        super().__init__(task_name="classification", output_root=output_root)
-        self.metrics = metrics
+    def __init__(self, task_name: str, metrics: list, output_root="results"):
+        super().__init__(task_name=task_name, metrics=metrics, output_root=output_root)
 
     def evaluate(self, model: BaseModel, dataset: BaseDataset, **kwargs):
         all_preds = []
@@ -18,7 +13,7 @@ class ClassificationTask(BaseTask):
 
         # 遍历数据集
         for feature, label in dataset:
-            pred = model.classify(feature, kwargs["num_classes"])
+            pred = model.classify(feature, kwargs.get("num_classes"))
             all_preds.append(pred)
             all_labels.append(label)
         
