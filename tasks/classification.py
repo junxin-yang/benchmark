@@ -12,7 +12,10 @@ class ClassificationTask(BaseTask):
         metric_results = {}
 
         # 遍历数据集
-        for feature, label in dataset:
+        for item in dataset:
+            feature = item.get("embedding")
+            slide_info = item.get("slide_info")
+            label = slide_info.get("classification_label")
             pred = model.classify(feature, kwargs.get("num_classes"))
             all_preds.append(pred)
             all_labels.append(label)

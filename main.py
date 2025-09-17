@@ -5,41 +5,61 @@ from datasets import Camelyon16, TCGA_BRCA, CustomDataset
 from tasks import ClassificationTask, ReportGenerationTask, SurvivalPredictionTask
 from utils.visualizer import plot_bar
 from utils.metrics import acc, precision, recall, f1, auc, bleu, c_index, auc_survival
+from utils.logger import default_logger as logger
 
 
-# [todo]
 from core.base_dataset import BaseDataset
+import os
 class SimpleDataset(BaseDataset):
     def __init__(self, data_root: str, **kwargs):
         super().__init__(data_root, **kwargs)
 
-        # report generation 任务的假数据
-        # self.data_list = [
-        #     ([1.0, 2.0, 3.0], 'Benign tissue identified.'),
-        #     ([4.0, 5.0, 6.0], 'Inflammatory changes present.'),
-        #     ([7.0, 8.0, 9.0], 'Benign tissue identified.')
-        # ]
-            
-        # Classfication 任务的假数据
-        # self.data_list = [
-        #     ([1.0, 2.0, 3.0], 0),
-        #     ([4.0, 5.0, 6.0], 1),
-        #     ([7.0, 8.0, 9.0], 0)
-        # ]
+        self.slides = ["slide1.svs", "slide2.svs", "slide3.svs"]
+        self.dataset_name = "SimpleDataset"
+        self.method = "dummy_method"
 
-        # survival prediction 任务的假数据
-        self.data_list = [
-            ([1.0, 2.0, 3.0], (10, 1)),
-            ([4.0, 5.0, 6.0], (20, 0)),
-            ([7.0, 8.0, 9.0], (30, 1))
-        ]
+        self.label_classification = {
+            "slide1.svs": 0,
+            "slide2.svs": 1,
+            "slide3.svs": 0
+        }
+        self.label_report_generation = {
+            "slide1.svs": "Benign tissue identified.",
+            "slide2.svs": "Inflammatory changes present.",
+            "slide3.svs": "Benign tissue identified."
+        }
+        self.label_survival_prediction = {
+            "slide1.svs": (10, 1),
+            "slide2.svs": (20, 0),
+            "slide3.svs": (30, 1)
+        }
 
     def __len__(self):
-        return len(self.data_list)
+        return len(self.slides)
 
     def __getitem__(self, idx):
-        feature, label = self.data_list[idx]
-        return feature, label
+        if idx < 0 or idx >= len(self.slides):
+            raise IndexError("Index out of range")
+        slide_name = self.slides[idx]
+        slide = os.path.join(self.slide_base_dir, slide_name)
+        feature = [float(idx+1), float(idx+2), float(idx+3)]
+        embedding = feature
+
+        classification_label = self.label_classification[slide_name]
+        report_generation_label = self.label_report_generation[slide_name]
+        survival_prediction_label = self.label_survival_prediction[slide_name]
+
+        slide_info = {
+            "slide_name": slide_name,
+            "slide_path": slide,
+            "classification_label": classification_label,
+            "report_generation_label": report_generation_label,
+            "survival_prediction_label": survival_prediction_label
+        }
+        return {
+            "embedding": embedding,
+            "slide_info": slide_info
+        }
     
 
 def main():
@@ -89,7 +109,7 @@ def main():
 
     # first layer loop: iterate over tasks
     for task_name, task_config in config.items():
-        print(f"\n=== Start processing tasks: {task_name} ===")
+        logger.info(f"=== Start processing tasks: {task_name} ===")
         
         # get current task's model list
         task_models = task_config.get('models')
@@ -104,14 +124,14 @@ def main():
 
         # second layer loop: iterate over current task's models
         for model_name in task_models:
-            print(f"\n--- Use the model: {model_name} ---")
+            logger.info(f"--- Use the model: {model_name} ---")
             model_config = model_configs.get(model_name)
 
             # third layer loop: iterate over current task's datasets
             for dataset_info in task_datasets:
                 dataset_name = dataset_info.get('name')
                 test_configs = dataset_info.get("configs", {})
-                print(f"\nProcessing dataset: {dataset_name}")
+                logger.info(f"\nProcessing dataset: {dataset_name}")
                 
                 try:
                     # initialize model
@@ -140,11 +160,11 @@ def main():
                     task.save_results(model_name=model_name, dataset_name=dataset_name, metrics=metric_results, predictions=all_preds)
 
                     # output results
-                    print(f"task {task_name} - model {model_name} - dataset {dataset_name} finished.")
-                    print(f"result: {metric_results}")
+                    logger.info(f"task {task_name} - model {model_name} - dataset {dataset_name} finished.")
+                    logger.info(f"result: {metric_results}")
 
                 except Exception as e:
-                    print(f"Erro: task {task_name} - model {model_name} - dataset {dataset_name} Execution failed: {str(e)}")
+                    logger.error(f"Erro: task {task_name} - model {model_name} - dataset {dataset_name} Execution failed: {str(e)}")
                     continue
 
         for metric in task_metrics:
@@ -153,7 +173,7 @@ def main():
                     result_dir=result_dir, fig_dir=fig_dir)
         
 
-    print("\n=== All tasks have been completed ===")
+    logger.info("\n=== All tasks have been completed ===")
 
 
 if __name__ == "__main__":

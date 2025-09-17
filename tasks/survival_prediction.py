@@ -11,8 +11,11 @@ class SurvivalPredictionTask(BaseTask):
         all_labels = []
         metric_results = {}
 
-        # 遍历数据集
-        for feature, label in dataset:
+        # 遍历数据集item
+        for item in dataset:
+            feature = item.get("embedding")
+            slide_info = item.get("slide_info")
+            label = slide_info.get("survival_prediction_label")
             pred = model.survival_predict(feature, kwargs.get("time_horizon"))
             all_preds.append(pred)
             all_labels.append(label)

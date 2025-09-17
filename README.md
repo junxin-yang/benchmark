@@ -59,6 +59,8 @@
     |   |   |  └──TCGA_BRCA.png
     │   ├── report_generation/
     │   └── survival_prediction/
+    |
+    |── logs/                  # 日志文件
     │
     ├── main.py               # 主程序（一键运行入口）
     └── requirements.txt       # 依赖库
