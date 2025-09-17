@@ -4,6 +4,7 @@ from typing import Any, List, Optional
 import pandas as pd
 from core.base_dataset import BaseDataset
 
+
 class Camelyon16(BaseDataset):
 
     def __init__(
@@ -27,7 +28,6 @@ class Camelyon16(BaseDataset):
         self.label_report_generation = pd.read_csv(
             os.path.join(self.label_base_dir, self.dataset_name, "report_generation.csv"))
 
-
     def __len__(self):
         return len(self.slides)
 
@@ -46,17 +46,18 @@ class Camelyon16(BaseDataset):
         row_class = self.label_classification[self.label_classification["slide_name"] == slide_name]
         row_report = self.label_report_generation[self.label_report_generation["slide_name"] == slide_name]
         classification_label = row_class.values
-        classification_report = row_report.values
+        report_generation_label = row_report.values
         slide_info = {
             "slide_name": slide_name,
             "slide_path": slide,
             "classification_label": classification_label,
-            "classification_report": classification_report
+            "report_generation_label": report_generation_label
         }
         return {
             "embedding": embedding,
             "slide_info": slide_info
         }
+
 
 if __name__ == "__main__":
     Camelyon16(data_root="/benchmark/", method="PRISM")
