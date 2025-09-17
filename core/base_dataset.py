@@ -19,7 +19,6 @@ class BaseDataset(Dataset, ABC):
         self.slide_base_dir = os.path.join(self.data_root, "slides")
         self.processed_base_dir = os.path.join(self.data_root, "preprocessed")
         self.label_base_dir = os.path.join(self.data_root, "label")
-        self.data_list = {}  # 用于存储样本信息（例如，WSI路径和标签的元组）
 
     @abstractmethod
     def __getitem__(self, index: int) -> Dict[str, Any]:
