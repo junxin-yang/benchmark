@@ -1,19 +1,10 @@
 TCGA_BRCA:
   data_root: "/data/TCGA/BRCA/"
-  labels_csv: "labels.csv"
-  reports_dir: "reports/"
-  preprocessed_dir: "preprocessed/"
 
 
 Camelyon16:
   data_root: "/data/Camelyon16/"
-  labels_csv: "labels.csv"
-  reports_dir: null
-  preprocessed_dir: "preprocessed/"
 
 
-CustomDataset: # 自定义数据集名称
+CustomDataset:
   data_root: "/data/CustomDataset/"
-  labels_csv: null # 如果没有标签，设置为 null
-  reports_dir: null # 如果没有报告，设置为 null
-  preprocessed_dir: null # 如果没有预处理数据，设置为 null

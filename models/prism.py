@@ -15,7 +15,7 @@ class PRISM(BaseModel):
         pred_class = random.randint(0, num_classes - 1)
         probs = [random.random() for _ in range(num_classes)]
         total = sum(probs)
-        probs = [p / total for p in probs]  # 归一化为概率分布
+        probs = [p / total for p in probs]
         return {"pred_class": pred_class, "probabilities": probs}
         
         # embedding_data = torch.load(feature)
