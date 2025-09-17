@@ -12,7 +12,10 @@ class ReportGenerationTask(BaseTask):
         metric_results = {}
 
         # 遍历数据集
-        for feature, label in dataset:
+        for item in dataset:
+            feature = item.get("embedding")
+            slide_info = item.get("slide_info")
+            label = slide_info.get("report_generation_label")
             pred = model.report_generate(feature)
             all_preds.append(pred)
             all_labels.append(label)
