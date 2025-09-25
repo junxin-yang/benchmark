@@ -1,16 +1,23 @@
 from abc import ABC, abstractmethod
 from transformers import AutoModel
+import os
+from utils.logger import default_logger as logger
 
 class BaseModel(ABC):
     def __init__(self, model_path: str, device: str, model_name: str):
         self.model_name = model_name
         self.model_path = model_path
         self.device = device
-        self.model = AutoModel.from_pretrained(
-            model_path,
-            trust_remote_code=True
-        ).to(self.device)
-        print(f"🚀 Successfully loaded {self.model_name}")
+        if self.model_path is None or not os.path.exists(self.model_path):
+            logger.info(f"⚠️ Warning: Model path '{self.model_path}' is None or does not exist. Model will not be loaded.")
+            self.model = None
+            # raise ValueError(f"Model path {self.model_path} does not exist.")
+        else:
+            self.model = AutoModel.from_pretrained(
+                model_path,
+                trust_remote_code=True
+            ).to(self.device)
+        logger.info(f"🚀 Successfully loaded {self.model_name}")
         
     @abstractmethod
     def report_generate(self, feature):

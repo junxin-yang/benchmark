@@ -11,7 +11,6 @@ class SurvivalPredictionTask(BaseTask):
         all_labels = []
         metric_results = {}
 
-        # 遍历数据集item
         for item in dataset:
             feature = item.get("embedding")
             slide_info = item.get("slide_info")
@@ -19,8 +18,7 @@ class SurvivalPredictionTask(BaseTask):
             pred = model.survival_predict(feature, kwargs.get("time_horizon"))
             all_preds.append(pred)
             all_labels.append(label)
-        
-        # 计算指标
+
         for metric_fn in self.metrics:
             metric_name = metric_fn.__name__
             metric_results[metric_name] = metric_fn(all_labels, all_preds)
