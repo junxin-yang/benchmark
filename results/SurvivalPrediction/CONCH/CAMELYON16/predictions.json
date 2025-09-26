@@ -1,11 +1,17 @@
 [
     {
-        "risk_score": 0.52
+        "slide1.svs": {
+            "risk_score": 0.42
+        }
     },
     {
-        "risk_score": 0.04
+        "slide2.svs": {
+            "risk_score": 0.35
+        }
     },
     {
-        "risk_score": 0.84
+        "slide3.svs": {
+            "risk_score": 0.54
+        }
     }
 ]

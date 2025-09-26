@@ -1,4 +1,4 @@
 {
-    "c_index": 1.0,
-    "auc_survival": 0.0
+    "c_index": 0.0,
+    "auc_survival": 0.5
 }

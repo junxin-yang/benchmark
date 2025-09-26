@@ -73,6 +73,9 @@ def main():
     with open('configs/datasets.yaml', 'r') as f:
         dataset_configs = yaml.safe_load(f)
 
+    result_dir = "results/"
+    fig_dir = "figures/"
+
     # task mapping dictionary
     task_mapping = {
         'Classification': ClassificationTask,
@@ -105,15 +108,11 @@ def main():
         logger.info(f"=== Start processing tasks: {task_name} ===")
         
         # get current task's model list
-        task_models = task_config.get('models')
+        task_models = task_config.get('models') # [todo] config 加一个状态开关
         # get current task's dataset list
         task_datasets = task_config.get('datasets')
         # get current task's metric list
         task_metrics = task_config.get('metrics')
-        # get current task's result directory
-        result_dir = task_config.get('result_dir')
-        # get current task's figure directory
-        fig_dir = task_config.get('fig_dir')
 
         # second layer loop: iterate over current task's models
         for model_name in task_models:

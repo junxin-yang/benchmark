@@ -1,0 +1,213 @@
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:105] - === Start processing tasks: Classification ===
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:120] - --- Use the model: UNI ---
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/UNI/TCGA_BRCA
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model UNI - dataset TCGA_BRCA finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 0.67, 'auc': 0.5}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/UNI/CAMELYON16
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model UNI - dataset CAMELYON16 finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 1.0, 'auc': 0.5}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/UNI/CUSTOM_DATASET
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model UNI - dataset CUSTOM_DATASET finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 0.67, 'auc': 1.0}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:120] - --- Use the model: PRISM ---
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/PRISM/TCGA_BRCA
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model PRISM - dataset TCGA_BRCA finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 0.67, 'auc': 1.0}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/PRISM/CAMELYON16
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model PRISM - dataset CAMELYON16 finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 1.0, 'auc': 0.0}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/PRISM/CUSTOM_DATASET
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model PRISM - dataset CUSTOM_DATASET finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 0.0, 'auc': 0.5}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:120] - --- Use the model: TITAN ---
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/TITAN/TCGA_BRCA
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model TITAN - dataset TCGA_BRCA finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 1.0, 'auc': 1.0}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/TITAN/CAMELYON16
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model TITAN - dataset CAMELYON16 finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 0.33, 'auc': 0.0}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/TITAN/CUSTOM_DATASET
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model TITAN - dataset CUSTOM_DATASET finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 0.67, 'auc': 0.5}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:120] - --- Use the model: CONCH ---
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/CONCH/TCGA_BRCA
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model CONCH - dataset TCGA_BRCA finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 0.67, 'auc': 1.0}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/CONCH/CAMELYON16
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model CONCH - dataset CAMELYON16 finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 0.67, 'auc': 0.5}
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:55:59 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 11:55:59 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/Classification/CONCH/CUSTOM_DATASET
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:158] - task Classification - model CONCH - dataset CUSTOM_DATASET finished.
+2025-09-26 11:55:59 - WSIBench - INFO - [main.py:159] - result: {'acc': 0.33, 'auc': 0.5}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:105] - === Start processing tasks: ReportGeneration ===
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:120] - --- Use the model: PRISM ---
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 11:56:00 - WSIBench - ERROR - [main.py:162] - Erro: task ReportGeneration - model PRISM - dataset TCGA_BRCA Execution failed: 'str' object has no attribute 'items'
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 11:56:00 - WSIBench - ERROR - [main.py:162] - Erro: task ReportGeneration - model PRISM - dataset CAMELYON16 Execution failed: 'str' object has no attribute 'items'
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 11:56:00 - WSIBench - ERROR - [main.py:162] - Erro: task ReportGeneration - model PRISM - dataset CUSTOM_DATASET Execution failed: 'str' object has no attribute 'items'
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:120] - --- Use the model: TITAN ---
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 11:56:00 - WSIBench - ERROR - [main.py:162] - Erro: task ReportGeneration - model TITAN - dataset TCGA_BRCA Execution failed: 'str' object has no attribute 'items'
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 11:56:00 - WSIBench - ERROR - [main.py:162] - Erro: task ReportGeneration - model TITAN - dataset CAMELYON16 Execution failed: 'str' object has no attribute 'items'
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 11:56:00 - WSIBench - ERROR - [main.py:162] - Erro: task ReportGeneration - model TITAN - dataset CUSTOM_DATASET Execution failed: 'str' object has no attribute 'items'
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:105] - === Start processing tasks: SurvivalPrediction ===
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:120] - --- Use the model: UNI ---
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/UNI/TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model UNI - dataset TCGA_BRCA finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 0.0, 'auc_survival': 0.5}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/UNI/CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model UNI - dataset CAMELYON16 finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 1.0, 'auc_survival': 0.0}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/UNI/CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model UNI - dataset CUSTOM_DATASET finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 1.0, 'auc_survival': 0.5}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:120] - --- Use the model: PRISM ---
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/PRISM/TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model PRISM - dataset TCGA_BRCA finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 0.0, 'auc_survival': 0.5}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/PRISM/CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model PRISM - dataset CAMELYON16 finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 1.0, 'auc_survival': 0.0}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/PRISM/CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model PRISM - dataset CUSTOM_DATASET finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 0.0, 'auc_survival': 1.0}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:120] - --- Use the model: TITAN ---
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/TITAN/TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model TITAN - dataset TCGA_BRCA finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 0.5, 'auc_survival': 1.0}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/TITAN/CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model TITAN - dataset CAMELYON16 finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 0.0, 'auc_survival': 1.0}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/TITAN/CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model TITAN - dataset CUSTOM_DATASET finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 0.5, 'auc_survival': 1.0}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:120] - --- Use the model: CONCH ---
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/CONCH/TCGA_BRCA
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model CONCH - dataset TCGA_BRCA finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 1.0, 'auc_survival': 0.5}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/CONCH/CAMELYON16
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model CONCH - dataset CAMELYON16 finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 1.0, 'auc_survival': 0.0}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 11:56:00 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 11:56:00 - WSIBench - INFO - [base_task.py:44] - Results saved to: results/SurvivalPrediction/CONCH/CUSTOM_DATASET
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:158] - task SurvivalPrediction - model CONCH - dataset CUSTOM_DATASET finished.
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:159] - result: {'c_index': 0.0, 'auc_survival': 0.5}
+2025-09-26 11:56:00 - WSIBench - INFO - [main.py:177] - 
+=== All tasks have been completed ===

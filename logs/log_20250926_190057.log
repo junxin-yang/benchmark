@@ -1,0 +1,6 @@
+2025-09-26 19:00:58 - WSIBench - INFO - [main.py:105] - === Start processing tasks: Classification ===
+2025-09-26 19:00:58 - WSIBench - INFO - [main.py:120] - --- Use the model: UNI ---
+2025-09-26 19:00:58 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 19:00:58 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 19:00:58 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI

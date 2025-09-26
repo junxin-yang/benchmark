@@ -1,23 +1,29 @@
 [
     {
-        "pred_class": 1,
-        "probabilities": [
-            0.4418530039815129,
-            0.558146996018487
-        ]
+        "slide1.svs": {
+            "pred_class": 1,
+            "probabilities": [
+                0.05,
+                0.95
+            ]
+        }
     },
     {
-        "pred_class": 1,
-        "probabilities": [
-            0.8073284130826489,
-            0.19267158691735117
-        ]
+        "slide2.svs": {
+            "pred_class": 1,
+            "probabilities": [
+                0.37,
+                0.63
+            ]
+        }
     },
     {
-        "pred_class": 1,
-        "probabilities": [
-            0.5575714674924834,
-            0.4424285325075165
-        ]
+        "slide3.svs": {
+            "pred_class": 0,
+            "probabilities": [
+                0.36,
+                0.64
+            ]
+        }
     }
 ]

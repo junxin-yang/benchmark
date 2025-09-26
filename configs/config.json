@@ -2,6 +2,7 @@
   "Classification": {
     "models": [
       "UNI",
+      "MULTI",
       "PRISM",
       "TITAN",
       "CONCH"
@@ -32,9 +33,7 @@
           "threshold": 0.5
         }
       }
-    ],
-    "result_dir": "results/",
-    "fig_dir": "figures/"
+    ]
   },
   "ReportGeneration": {
     "models": [
@@ -54,9 +53,7 @@
       {
         "name": "CUSTOM_DATASET"
       }
-    ],
-    "result_dir": "results/",
-    "fig_dir": "figures/"
+    ]
   },
   "SurvivalPrediction": {
     "models": [
@@ -91,8 +88,6 @@
           "time_horizon": 5
         }
       }
-    ],
-    "result_dir": "results/",
-    "fig_dir": "figures/"
+    ]
   }
 }

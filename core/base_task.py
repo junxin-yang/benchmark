@@ -7,6 +7,18 @@ from .base_model import BaseModel
 from .base_dataset import BaseDataset
 from utils.logger import default_logger as logger
 
+def round_floats(obj):
+    for key, value in obj.items():
+        if isinstance(value, float):
+            obj[key] = round(value, 2)
+        elif isinstance(value, dict):
+            obj[key] = round_floats(value)
+        elif isinstance(value, list):
+            obj[key] = [round(v, 2) if isinstance(v, float) else v for v in value]
+        else:
+            obj[key] = value
+    return obj
+
 class BaseTask(ABC):
     def __init__(self, task_name: str, metrics: list, output_root: str = "results"):
         self.task_name = task_name
@@ -36,9 +48,7 @@ class BaseTask(ABC):
         pred_path = os.path.join(dataset_dir, 'predictions.json')
         with open(pred_path, 'w') as f:
             for prediction in predictions:
-                for key, value in prediction.items():
-                    if isinstance(value, float):
-                        prediction[key] = round(value, 2)
+                prediction = round_floats(prediction)
             json.dump(predictions, f, indent=4)
 
         logger.info(f"Results saved to: {dataset_dir}")

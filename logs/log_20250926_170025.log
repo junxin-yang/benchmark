@@ -1,0 +1,177 @@
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:105] - === Start processing tasks: Classification ===
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:120] - --- Use the model: UNI ---
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model UNI - dataset TCGA_BRCA Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model UNI - dataset CAMELYON16 Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model UNI - dataset CUSTOM_DATASET Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:120] - --- Use the model: PRISM ---
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model PRISM - dataset TCGA_BRCA Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model PRISM - dataset CAMELYON16 Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model PRISM - dataset CUSTOM_DATASET Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:120] - --- Use the model: TITAN ---
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model TITAN - dataset TCGA_BRCA Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model TITAN - dataset CAMELYON16 Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model TITAN - dataset CUSTOM_DATASET Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:120] - --- Use the model: CONCH ---
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model CONCH - dataset TCGA_BRCA Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model CONCH - dataset CAMELYON16 Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:25 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:25 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 17:00:25 - WSIBench - ERROR - [main.py:162] - Erro: task Classification - model CONCH - dataset CUSTOM_DATASET Execution failed: Classification metrics can't handle a mix of binary and unknown targets
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:105] - === Start processing tasks: ReportGeneration ===
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:120] - --- Use the model: PRISM ---
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 17:00:26 - WSIBench - INFO - [base_task.py:54] - Results saved to: results/ReportGeneration/PRISM/TCGA_BRCA
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:158] - task ReportGeneration - model PRISM - dataset TCGA_BRCA finished.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:159] - result: {'bleu': 0.0}
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 17:00:26 - WSIBench - INFO - [base_task.py:54] - Results saved to: results/ReportGeneration/PRISM/CAMELYON16
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:158] - task ReportGeneration - model PRISM - dataset CAMELYON16 finished.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:159] - result: {'bleu': 0.0}
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 17:00:26 - WSIBench - INFO - [base_task.py:54] - Results saved to: results/ReportGeneration/PRISM/CUSTOM_DATASET
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:158] - task ReportGeneration - model PRISM - dataset CUSTOM_DATASET finished.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:159] - result: {'bleu': 0.0}
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:120] - --- Use the model: TITAN ---
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 17:00:26 - WSIBench - INFO - [base_task.py:54] - Results saved to: results/ReportGeneration/TITAN/TCGA_BRCA
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:158] - task ReportGeneration - model TITAN - dataset TCGA_BRCA finished.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:159] - result: {'bleu': 0.0}
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 17:00:26 - WSIBench - INFO - [base_task.py:54] - Results saved to: results/ReportGeneration/TITAN/CAMELYON16
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:158] - task ReportGeneration - model TITAN - dataset CAMELYON16 finished.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:159] - result: {'bleu': 0.0}
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 17:00:26 - WSIBench - INFO - [base_task.py:54] - Results saved to: results/ReportGeneration/TITAN/CUSTOM_DATASET
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:158] - task ReportGeneration - model TITAN - dataset CUSTOM_DATASET finished.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:159] - result: {'bleu': 0.0}
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:105] - === Start processing tasks: SurvivalPrediction ===
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:120] - --- Use the model: UNI ---
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model UNI - dataset TCGA_BRCA Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model UNI - dataset CAMELYON16 Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/uni/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded UNI
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model UNI - dataset CUSTOM_DATASET Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:120] - --- Use the model: PRISM ---
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model PRISM - dataset TCGA_BRCA Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model PRISM - dataset CAMELYON16 Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/prism/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded PRISM
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model PRISM - dataset CUSTOM_DATASET Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:120] - --- Use the model: TITAN ---
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model TITAN - dataset TCGA_BRCA Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model TITAN - dataset CAMELYON16 Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/titan/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded TITAN
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model TITAN - dataset CUSTOM_DATASET Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:120] - --- Use the model: CONCH ---
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: TCGA_BRCA
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model CONCH - dataset TCGA_BRCA Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CAMELYON16
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model CONCH - dataset CAMELYON16 Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:127] - 
+Processing dataset: CUSTOM_DATASET
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:12] - ⚠️ Warning: Model path 'path/to/your/conch/' is None or does not exist. Model will not be loaded.
+2025-09-26 17:00:26 - WSIBench - INFO - [base_model.py:20] - 🚀 Successfully loaded CONCH
+2025-09-26 17:00:26 - WSIBench - ERROR - [main.py:162] - Erro: task SurvivalPrediction - model CONCH - dataset CUSTOM_DATASET Execution failed: NaNs detected in inputs, please correct or drop.
+2025-09-26 17:00:26 - WSIBench - INFO - [main.py:177] - 
+=== All tasks have been completed ===
