@@ -1,0 +1,98 @@
+{
+  "Classification": {
+    "models": [
+      "UNI",
+      "PRISM",
+      "TITAN",
+      "CONCH"
+    ],
+    "metrics": [
+      "ACC",
+      "AUC"
+    ],
+    "datasets": [
+      {
+        "name": "TCGA_BRCA",
+        "configs": {
+          "num_classes": 2,
+          "threshold": 0.5
+        }
+      },
+      {
+        "name": "CAMELYON16",
+        "configs": {
+          "num_classes": 2,
+          "threshold": 0.5
+        }
+      },
+      {
+        "name": "CUSTOM_DATASET",
+        "configs": {
+          "num_classes": 2,
+          "threshold": 0.5
+        }
+      }
+    ],
+    "result_dir": "results/",
+    "fig_dir": "figures/"
+  },
+  "ReportGeneration": {
+    "models": [
+      "PRISM",
+      "TITAN"
+    ],
+    "metrics": [
+      "BLEU"
+    ],
+    "datasets": [
+      {
+        "name": "TCGA_BRCA"
+      },
+      {
+        "name": "CAMELYON16"
+      },
+      {
+        "name": "CUSTOM_DATASET"
+      }
+    ],
+    "result_dir": "results/",
+    "fig_dir": "figures/"
+  },
+  "SurvivalPrediction": {
+    "models": [
+      "UNI",
+      "PRISM",
+      "TITAN",
+      "CONCH"
+    ],
+    "metrics": [
+      "c_index",
+      "AUC_Survival"
+    ],
+    "datasets": [
+      {
+        "name": "TCGA_BRCA",
+        "configs": {
+          "num_classes": 2,
+          "time_horizon": 5
+        }
+      },
+      {
+        "name": "CAMELYON16",
+        "configs": {
+          "num_classes": 2,
+          "time_horizon": 5
+        }
+      },
+      {
+        "name": "CUSTOM_DATASET",
+        "configs": {
+          "num_classes": 2,
+          "time_horizon": 5
+        }
+      }
+    ],
+    "result_dir": "results/",
+    "fig_dir": "figures/"
+  }
+}

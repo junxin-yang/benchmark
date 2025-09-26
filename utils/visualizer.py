@@ -1,0 +1,59 @@
+from sklearn.metrics import RocCurveDisplay
+from sklearn.metrics import ConfusionMatrixDisplay
+import matplotlib
+from matplotlib import pyplot as plt
+import os
+import json
+import numpy as np
+
+def plot_roc_curve(self, labels, probs):
+    # 实现ROC曲线绘制
+    fig, ax = plt.subplots()
+    RocCurveDisplay.from_predictions(labels, probs, ax=ax)
+    ax.set_title('ROC Curve')
+    return fig
+    
+def plot_confusion_matrix(self, labels, preds):
+    fig, ax = plt.subplots()
+    ConfusionMatrixDisplay.from_predictions(labels, preds, ax=ax)
+    ax.set_title('Confusion Matrix')
+    return fig
+
+def plot_bar(models: list, datasets: list, task_name: str, metric: str, result_dir: str, fig_dir: str, 
+             bar_color="skyblue", bar_width=0.6, bar_gap=0.4, font_family="Arial", font_size=14):
+    fig_dir = os.path.join(fig_dir, task_name)
+    os.makedirs(fig_dir, exist_ok=True)
+    metric_dir = os.path.join(fig_dir, metric)
+    os.makedirs(metric_dir, exist_ok=True)
+
+    matplotlib.rcParams['font.family'] = font_family
+    matplotlib.rcParams['font.size'] = font_size
+
+    for dataset in datasets:
+        metric_values = []
+        for model in models:
+            task_dir = os.path.join(result_dir, task_name)
+            model_dir = os.path.join(task_dir, model)
+            dataset_dir = os.path.join(model_dir, dataset)
+            metrics_path = os.path.join(dataset_dir, 'metrics.json')
+            if os.path.exists(metrics_path):
+                with open(metrics_path, 'r') as f:
+                    metrics = json.load(f)
+                    metric_value = metrics.get(metric.lower(), 0)
+                    metric_values.append(metric_value)
+            else:
+                metric_values.append(0)
+
+        # compute bar positions
+        x = np.arange(len(models)) * (bar_width + bar_gap)
+        
+        fig, ax = plt.subplots()
+        ax.bar(x, metric_values, width=bar_width, color=bar_color)
+        ax.set_xlabel(dataset, fontname=font_family, fontsize=font_size)
+        ax.set_ylabel(metric, fontname=font_family, fontsize=font_size)
+        ax.set_xticks(x)
+        ax.set_xticklabels(models, fontname=font_family, fontsize=font_size)
+        fig.tight_layout()
+        fig_path = os.path.join(metric_dir, f"{dataset}.png")
+        fig.savefig(fig_path)
+        plt.close(fig)

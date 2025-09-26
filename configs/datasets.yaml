@@ -1,0 +1,13 @@
+TCGA_BRCA:
+  root_dir: "/data/TCGA/BRCA/"
+  supported_tasks: ['Classification', 'ReportGeneration', 'SurvivalPrediction']
+
+
+Camelyon16:
+  root_dir: "/data/Camelyon16/"
+  supported_tasks: ['Classification', 'ReportGeneration', 'SurvivalPrediction']
+
+
+CustomDataset:
+  root_dir: "/data/CustomDataset/"
+  supported_tasks: ['Classification', 'ReportGeneration', 'SurvivalPrediction']
