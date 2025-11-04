@@ -1,7 +1,9 @@
 import yaml
 import json
-from models import CONCH, UNI, PRISM, TITAN
-from datasets import Camelyon16, TCGA_BRCA, CustomDataset
+import torch
+import torch.nn as nn
+from models.patch_models import CONCH, UNI, PRISM, TITAN
+from datasets import TCGA_BRCA, CustomDataset, Camelyon17_WILDS
 from tasks import ClassificationTask, ReportGenerationTask, SurvivalPredictionTask
 from utils.visualizer import plot_bar
 from utils.metrics import acc, precision, recall, f1, auc, bleu, c_index, auc_survival
@@ -83,7 +85,7 @@ def main():
     # dataset mapping dictionary
     dataset_mapping = {
         'TCGA_BRCA': TCGA_BRCA,
-        'CAMELYON16': Camelyon16,
+        'Camelyon17-WILDS': Camelyon17_WILDS,
         'CUSTOM_DATASET': CustomDataset
     }
 
@@ -136,7 +138,7 @@ def main():
                 try:
                     # initialize model
                     model_class = model_mapping[model_name]
-                    model = model_class(model_path = model_config.get("model_path"), 
+                    model = model_class(weight_path = model_config.get("model_path"), 
                                         model_name = model_name, 
                                         device = model_config.get("device"))
                     

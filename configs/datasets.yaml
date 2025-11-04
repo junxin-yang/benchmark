@@ -1,10 +1,14 @@
-TCGA_BRCA:
-  data_root: "/data/TCGA/BRCA/"
+CRC-100K:
+  data_root: "/data/CRC-100K/"
 
 
-Camelyon16:
-  data_root: "/data/Camelyon16/"
+Camelyon17-WILDS:
+  data_root: "/data/Camelyon17-WILDS/"
 
 
-CustomDataset:
-  data_root: "/data/CustomDataset/"
+WSSS4LUAD:
+  data_root: "/data/WSSS4LUAD/"
+
+
+TCGA-TIL:
+  data_root: "/data/TCGA/TIL/"

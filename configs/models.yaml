@@ -1,5 +1,5 @@
 PRISM:
-  model_path: "path/to/your/prism/"
+  model_path: "/data/case_level/open_source_model/model/Prism/pytorch_model.bin"
   segmenter: "hest"
   mag: 20
   patch_size: 224
@@ -9,19 +9,29 @@ PRISM:
   device: "cuda"
 
 CONCH:
-  model_path: "path/to/your/conch/"
-  model_param1: value1
-  model_param2: value2
+  model_path: "/data/case_level/open_source_model/model/conch/pytorch_model.bin"
+  mag: 20
+  patch_size: 224
+  overlap: 0
   device: "cuda"
 
 UNI:
-  model_path: "path/to/your/uni/"
-  model_param1: value1
-  model_param2: value2
+  model_path: "/data/case_level/open_source_model/model/uni/pytorch_model.bin"
+  mag: 20
+  patch_size: 224
+  overlap: 0
   device: "cuda"
 
 TITAN:
-  model_path: "path/to/your/titan/"
-  model_param1: value1
-  model_param2: value2
+  model_path: "/data/case_level/open_source_model/model/Titan/pytorch_model.bin"
+  mag: 20
+  patch_size: 224
+  overlap: 0
+  device: "cuda"
+
+Virchow:
+  model_path: "/data/case_level/open_source_model/model/Virchow/pytorch_model.bin"
+  mag: 20
+  patch_size: 224
+  overlap: 0
   device: "cuda"
