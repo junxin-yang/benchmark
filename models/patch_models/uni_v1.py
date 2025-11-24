@@ -11,11 +11,12 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 
 config_path = os.path.join(project_root, "configs", "models.yaml")
 
-class UNI(BasePatchModel):
+class UNI_V1(BasePatchModel):
     def __init__(self, **build_kwargs):
         """
         UNI initialization.
         """
+        self.enc_name = 'UNI_V1'
         super().__init__(**build_kwargs)
 
     def _build(
@@ -25,13 +26,11 @@ class UNI(BasePatchModel):
         import timm
         from torchvision import transforms
 
-        self.enc_name = 'uni_v1'
-        with open(config_path, "r") as f:
-            config = yaml.safe_load(f)
+        
+        self.weights_path = self.model_configs.get("patch_model_path")
+        self.device = self.model_configs.get("device")
 
-        weights_path = config['UNI'].get('model_path', None)
-
-        if weights_path:
+        if self.weights_path:
             try:
                 timm_kwargs = {
                     'img_size': 224,
@@ -41,12 +40,12 @@ class UNI(BasePatchModel):
                     'dynamic_img_size': True,
                 }
                 model = timm.create_model("vit_large_patch16_224", **timm_kwargs)
-                model.load_state_dict(torch.load(weights_path, map_location="cpu"), strict=True)
-                print(f"🚁Loaded UNI model weights from {weights_path}")
+                model.load_state_dict(torch.load(self.weights_path, map_location="cpu"), strict=True)
+                print(f"🚁  ==> Loaded {self.enc_name} model weights from {self.weights_path}")
             except:
                 traceback.print_exc()
                 raise Exception(
-                    f"Failed to create UNI model from local checkpoint at '{weights_path}'. "
+                    f"Failed to create UNI model from local checkpoint at '{self.weights_path}'. "
                     "You can download the required `pytorch_model.bin` from: https://huggingface.co/MahmoodLab/UNI."
                 )
         else:
@@ -64,7 +63,8 @@ class UNI(BasePatchModel):
             transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
         ])
 
-        precision = torch.float16
+        precision = torch.float32
+        model = model.to(self.device, dtype=precision)
         return model, eval_transform, precision
 
     def classify(self, feature, num_classes):
@@ -114,4 +114,7 @@ class UNI(BasePatchModel):
         raise NotImplementedError("UNI does not support report generation.")
 
 if __name__ == "__main__":
-    model = UNI()
+    model = UNI_V1()
+    dummy_input = torch.randn(2, 3, 224, 224)
+    output = model.forward(dummy_input)
+    print(output.shape)

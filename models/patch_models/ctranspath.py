@@ -8,17 +8,14 @@ from models.patch_models.utils.constants import get_constants
 from models.patch_models.utils.transform_utils import get_eval_transforms
 import yaml
 
-# 获取项目根路径
-project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-config_path = os.path.join(project_root, "configs", "models.yaml")
-
-class CTransPathInferenceEncoder(BasePatchModel):
+class CTransPath(BasePatchModel):
 
     def __init__(self, **build_kwargs):
         """
         CTransPath initialization.
         """
+        self.enc_name = 'CTransPath'
         super().__init__(**build_kwargs)
 
     def _build(self):
@@ -26,22 +23,22 @@ class CTransPathInferenceEncoder(BasePatchModel):
         from torch import nn
 
         try:
-            from .model_zoo.ctranspath.ctran import ctranspath
+            from models.patch_models.model_zoo.ctranspath.ctran import ctranspath
         except:
             traceback.print_exc()
             raise Exception("Failed to import CTransPath model, make sure timm_ctp is installed. `pip install timm_ctp`")
         
-        self.enc_name = 'ctranspath'
-        weights_path = self._get_weights_path()
+        self.weights_path = self.model_configs.get("patch_model_path")
+        self.device = self.model_configs.get("device")
 
         model = ctranspath(img_size=224)
         model.head = nn.Identity()
 
-        if not weights_path:
+        if not self.weights_path:
             self.ensure_has_internet(self.enc_name)
             try:
                 from huggingface_hub import hf_hub_download   
-                weights_path = hf_hub_download(
+                self.weights_path = hf_hub_download(
                     repo_id="MahmoodLab/hest-bench",
                     repo_type="dataset",
                     filename="CHIEF_CTransPath.pth",
@@ -52,11 +49,13 @@ class CTransPathInferenceEncoder(BasePatchModel):
                 raise Exception("Failed to download CTransPath model, make sure that you were granted access and that you correctly registered your token")
 
         try:
-            state_dict = torch.load(weights_path, weights_only=True)['model']
+            state_dict = torch.load(self.weights_path, weights_only=True)['model']
+            print(f"🚁  ==> Loaded {self.enc_name} model weights from {self.weights_path}")
+
         except:
                 traceback.print_exc()
                 raise Exception(
-                    f"Failed to create CTransPath model from local checkpoint at '{weights_path}'. "
+                    f"Failed to create CTransPath model from local checkpoint at '{self.weights_path}'. "
                     "You can download the required `CHIEF_CTransPath.pth` from: https://huggingface.co/datasets/MahmoodLab/hest-bench/tree/main/fm_v1/ctranspath."
                 )
         state_dict = {key: val for key, val in state_dict.items() if 'attn_mask' not in key}
@@ -68,9 +67,9 @@ class CTransPathInferenceEncoder(BasePatchModel):
         eval_transform = get_eval_transforms(mean, std, target_img_size=224, interpolation=InterpolationMode.BILINEAR, max_size=None, antialias=True)
 
         precision = torch.float32
-        
+        model = model.to(self.device, dtype=precision)
         return model, eval_transform, precision
-    
+        
     def classify(self, feature, num_classes):
         import random
         pred_class = random.randint(0, num_classes - 1)
@@ -116,3 +115,10 @@ class CTransPathInferenceEncoder(BasePatchModel):
 
     def report_generate(self, feature):
         raise NotImplementedError("CONCH does not support report generation.")
+    
+
+if __name__ == "__main__":
+    model = CTransPath()
+    dummy_input = torch.randn(2, 3, 224, 224)  # batch_size=2, 3 channels, 224x224 image
+    output = model.forward(dummy_input)
+    print(output.shape)  # Expected: (2, embedding_dim)

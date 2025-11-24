@@ -1,5 +1,13 @@
-from .conch_v1 import CONCH
-from .uni import UNI
-from .virchow import Virchow
+from models.patch_models.conch_v1 import CONCH_V1
+from models.patch_models.ctranspath import CTransPath
+from models.patch_models.prov_gigapath import ProvGigaPath
+from models.patch_models.uni_v1 import UNI_V1
+from models.patch_models.virchow_v1 import Virchow_V1
 
-__all__ = ["CONCH", "UNI", "Virchow", ...]
+__all__ = [
+    "CONCH_V1",
+    "CTransPath",
+    "ProvGigaPath",
+    "UNI_V1",
+    "Virchow_V1",
+]

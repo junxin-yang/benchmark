@@ -12,13 +12,14 @@ project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 config_path = os.path.join(project_root, "configs", "models.yaml")
 
 
-class Virchow(BasePatchModel):
+class Virchow_V1(BasePatchModel):
     import timm
     
     def __init__(self, **build_kwargs):
         """
         Virchow initialization.
         """
+        self.enc_name = 'Virchow_V1'
         super().__init__(**build_kwargs)
 
     def _build(
@@ -30,13 +31,11 @@ class Virchow(BasePatchModel):
         import torchvision
         from torchvision import transforms
 
-        self.enc_name = 'virchow'
-        with open(config_path, "r") as f:
-            config = yaml.safe_load(f)
         
-        weights_path = config['Virchow'].get('model_path', None)
+        self.weights_path = self.model_configs.get("patch_model_path")
+        self.device = self.model_configs.get("device")
 
-        if weights_path:
+        if self.weights_path:
             try:
                 timm_kwargs = {
                     "img_size": 224,
@@ -49,12 +48,12 @@ class Virchow(BasePatchModel):
                     'act_layer': torch.nn.SiLU,
                 }
                 model = timm.create_model("vit_huge_patch14_224", **timm_kwargs)
-                model.load_state_dict(state_dict=torch.load(weights_path, map_location="cpu"), strict=True)
-                print(f"🚁Loaded Virchow model weights from {weights_path}")
+                model.load_state_dict(state_dict=torch.load(self.weights_path, map_location="cpu"), strict=True)
+                print(f"🚁  ==> Loaded {self.enc_name} model weights from {self.weights_path}")
             except:
                 traceback.print_exc()
                 raise Exception(
-                    f"Failed to create Virchow model from local checkpoint at '{weights_path}'. "
+                    f"Failed to create Virchow model from local checkpoint at '{self.weights_path}'. "
                     "You can download the required `pytorch_model.bin` from: https://huggingface.co/paige-ai/Virchow."
                 )
         else:
@@ -72,12 +71,13 @@ class Virchow(BasePatchModel):
                 transforms.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
             ]
         )
-        precision = torch.float16
+        precision = torch.float32
         self.return_cls = return_cls
-        
+        model = model.to(self.device, dtype=precision)
         return model, eval_transform, precision
 
     def forward(self, x):
+        x = x.to(self.device, dtype=self.precision)
         output = self.model(x)
         class_token = output[:, 0]
 
@@ -135,4 +135,7 @@ class Virchow(BasePatchModel):
         raise NotImplementedError("CONCH does not support report generation.")
     
 if __name__ == "__main__":
-    model = Virchow()
+    model = Virchow_V1()
+    dummy_input = torch.randn(2, 3, 224, 224)
+    output = model.forward(dummy_input)
+    print(output.shape)

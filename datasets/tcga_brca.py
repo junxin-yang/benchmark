@@ -1,41 +1,32 @@
 import os
+import sys
 import torch
 from typing import Any, List, Optional
 import pandas as pd
 import yaml
-
+import glob
+from torch.utils.data import Dataset
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
 from core.base_dataset import BaseDataset
 
 
-class Dataset(BaseDataset):
+class TCGA_BRCA(BaseDataset):
 
     def __init__(
             self,
-            data_root: str,
-            dataset_name: str,
-            method: str,
-            supported_tasks: Optional[List[str]] = None,
+            model: str,
             **kwargs: Any,
     ):
-        super().__init__(data_root, **kwargs)
-        self.dataset_name = dataset_name
-        self.method = method
-        self.slide_dir = os.path.join(self.slide_base_dir, self.dataset_name)
-        self.slides = os.listdir(self.slide_dir)
-        with open('configs/model.yaml', 'r') as f:
-            method_configs = yaml.safe_load(f)
-        self.encoder = method_configs[self.method]['patch_encoder']
-        self.supported_tasks = supported_tasks
-
-        if supported_tasks is not None:
-            self._supported_tasks = supported_tasks
+        self.dataset_name = "TCGA-BRCA"
+        self.model = model
+        super().__init__(**kwargs)
+        self.slides = glob.glob(os.path.join(self.slide_dir, "*", "*.svs"))
 
         # 记载数据集有的所有下游任务的标签，假设所有标签都是两列：| slide_name | , | label |
         # 这样加载就可以动态的根据supported_tasks加载不同数量的label
-        self.total_labels = {}
-        for task in supported_tasks:
-            self.total_labels[task] = pd.read_csv(
-                os.path.join(self.label_base_dir, self.dataset_name, f"{task}.csv"))
+        print(f"🚩  ==> Loading features for model: {self.model} ")
+        self._build()
 
     def __len__(self):
         return len(self.slides)
@@ -45,7 +36,7 @@ class Dataset(BaseDataset):
             raise IndexError("Index out of range")
         slide_name = self.slides[idx]  # 包含文件后缀名-->文件格式
         slide = os.path.join(self.slide_dir, slide_name)
-        feature = os.path.join(self.processed_base_dir, self.dataset_name, self.encoder,
+        feature = os.path.join(self.processed_base_dir, self.dataset_name, self.encoder_module,
                                slide_name + ".pt")  # 特征文件假设为pt文件
         # 校验特征文件是否存在
         if os.path.exists(feature):
@@ -68,7 +59,14 @@ class Dataset(BaseDataset):
             "slide_info": slide_info
         }
 
+    def get_label(self):
+        for task in self._supported_tasks:
+            self.total_labels[task] = pd.read_csv(
+                os.path.join(self.label_base_dir, self.dataset_name, f"{task}.csv"))
+
+    
+            
 
 if __name__ == "__main__":
-    print("hello")
-    # Camelyon16(data_root="/benchmark/", method="PRISM")
+    models = ["UNI_V1", "CONCH_V1", "CTransPath", "Virchow_V1", "ProvGigaPath"]
+    dataset = TCGA_BRCA(model=models[3])

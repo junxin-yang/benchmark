@@ -1,14 +1,48 @@
+import sys
+import os
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(PROJECT_ROOT)
 import torch
-from transformers import AutoModel
-from core.base_model import BaseModel
+import traceback
+from abc import abstractmethod
+from einops import rearrange
+from typing import Optional, Tuple
+from core.base_model import BaseSlideModel
+import yaml
 
-class TITAN(BaseModel):
-    def __init__(self, model_path, model_name="TITAN", device="cuda"):
-        super().__init__(
-            model_path=model_path,
-            device=device,
-            model_name=model_name
-        )
+# 获取项目根路径
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+config_path = os.path.join(project_root, "configs", "models.yaml")
+
+class TITAN(BaseSlideModel):
+    def __init__(self, **build_kwargs):
+        """
+        Titan initialization.
+        """
+        super().__init__(**build_kwargs)
+
+    def _build(self, pretrained=True):
+        self.enc_name = 'TITAN'
+        assert pretrained, "TitanSlideEncoder has no non-pretrained models. Please load with pretrained=True."
+        from transformers import AutoModel 
+
+        cfg = self.load_config(config_path, self.enc_name)
+        self.weights_path = cfg.get("slide_model_path")
+        self.device = cfg.get("device")
+
+        try:
+            model = AutoModel.from_pretrained(self.weights_path, trust_remote_code=True)
+            print(f"🚁Loaded TITAN model weights from {self.weights_path}")
+        except:
+            model = AutoModel.from_pretrained('MahmoodLab/TITAN', trust_remote_code=True)
+            print("🚁Downloaded TITAN model weights from HuggingFace Hub")
+        precision = torch.float16
+        embedding_dim = 768
+        return model, precision, embedding_dim
+
+    def forward(self, batch, device='cuda'):
+        z = self.model.encode_slide_from_patch_features(batch['features'].to(device), batch['coords'].to(device), batch['attributes']['patch_size_level0'])        
+        return z
 
     def classify(self, feature, num_classes):
         import random
@@ -80,3 +114,13 @@ class TITAN(BaseModel):
         #     )
         #     genned_caption = self.model.untokenize(genned_ids)
         # return genned_caption
+
+if __name__ == "__main__":
+    model = TITAN(pretrained=True)
+    dummy_input = {
+        'features': torch.randn(1, 50, 768),  # batch_size=1, tile_seq_len=50, tile_embed_dim=768
+        'coords': torch.randint(0, 20000, (1, 50, 2), dtype=torch.long),      # batch_size=1, tile_seq_len=50, coord_dim=2
+        'attributes': {'patch_size_level0': 512}
+    }
+    output = model.forward(dummy_input, device='cpu')
+    print("Output shape:", output.shape)  # Expected: (1, 768)

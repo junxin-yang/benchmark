@@ -12,3 +12,8 @@ WSSS4LUAD:
 
 TCGA-TIL:
   data_root: "/data/TCGA/TIL/"
+
+
+TCGA-BRCA:
+  data_root: "/data/slide_files/nas/vol2/Public_Data/benchmark/"
+  slide_file_path: "/data/slide_files/nas/vol2/Public_Data/TCGA/TCGA-BRCA"

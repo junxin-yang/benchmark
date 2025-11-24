@@ -3,47 +3,16 @@ from transformers import AutoModel
 import os
 import json
 import socket
+import yaml
 import torch
 from typing import Optional
+from tqdm import tqdm
 # from utils.logger import default_logger as logger
 
-# class BaseModel(ABC):
-#     def __init__(self, model_path: str, device: str, model_name: str):
-#         self.model_name = model_name
-#         self.model_path = model_path
-#         self.device = device
-#         if self.model_path is None or not os.path.exists(self.model_path):
-#             logger.info(f"⚠️ Warning: Model path '{self.model_path}' is None or does not exist. Model will not be loaded.")
-#             self.model = None
-#             # raise ValueError(f"Model path {self.model_path} does not exist.")
-#         else:
-#             self.model = AutoModel.from_pretrained(
-#                 model_path,
-#                 trust_remote_code=True
-#             ).to(self.device)
-#         logger.info(f"🚀 Successfully loaded {self.model_name}")
-        
-#     @abstractmethod
-#     def report_generate(self, feature):
-#         """Generate pathology report (if supported by the model)"""
-#         pass
+# 获取项目根路径
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-#     @abstractmethod
-#     def classify(self, feature, num_classes):
-#         """Pathology classification. Returns predicted class or probabilities."""
-#         pass
-
-#     @abstractmethod
-#     def survival_predict(self, feature, time_horizon=None):
-#         """
-#         Survival prediction.
-#         Args:
-#             feature: input features for prediction
-#             time_horizon: optional, predict survival at a specific time point
-#         Returns:
-#             Survival probability or risk score
-#         """
-#         pass
+config_path = os.path.join(project_root, "configs", "models.yaml")
 
 def get_weights_path(model_type, encoder_name):
     """
@@ -124,9 +93,10 @@ class BasePatchModel(torch.nn.Module):
         """
 
         super().__init__()
-        self.enc_name: Optional[str] = None
         self.weights_path: Optional[str] = weights_path
+        self.model_configs = self.load_config(config_path, self.enc_name)
         self.model, self.eval_transforms, self.precision = self._build(**build_kwargs)
+        
 
     def ensure_valid_weights_path(self, weights_path):
         if weights_path and not os.path.isfile(weights_path):
@@ -159,9 +129,77 @@ class BasePatchModel(torch.nn.Module):
         """
         Can be overwritten if model requires special forward pass.
         """
+        x = x.to(self.device, dtype=self.precision)
         z = self.model(x)
         return z
+    
+    def load_config(self, file_path, section, defaults={"patch_model_path": "", "device": "cpu"}):
+        """加载指定 section 的配置，并返回 dict，使用 defaults 补全缺失值"""
+        defaults = defaults or {}
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Config file not found: {file_path}")
+        
+        with open(file_path, "r") as f:
+            config = yaml.safe_load(f) or {}
+        section_cfg = config.get(section, {})
+        return section_cfg
+    
+
+    def encode_patches(self, loader, device):
+        features = torch.Tensor().to(device)
+        with torch.no_grad():
+            for _, input in tqdm(enumerate(loader), total=len(loader)):
+                input = input.to(device)
+                feature = self.forward(input)
+                features = torch.cat((features, feature), dim=0)
+        return features.cpu()
         
     @abstractmethod
     def _build(self, **build_kwargs):
+        pass
+
+
+class BaseSlideModel(torch.nn.Module):
+    
+    def __init__(self, freeze: bool = True, **build_kwargs: dict) -> None:
+        """
+        Parent class for all pretrained slide encoders.
+        """
+        super().__init__()
+        self.enc_name = None
+        self.model, self.precision, self.embedding_dim = self._build(**build_kwargs)
+
+        # Set all parameters to be non-trainable
+        if freeze and self.model is not None:
+            for param in self.model.parameters():
+                param.requires_grad = False
+            self.model.eval()
+        
+    def forward(self, batch):
+        """
+        Can be overwritten if model requires special forward pass.
+        """
+        batch = batch.to(next(self.model.parameters()).device)  # 保证输入与权重同设备
+        z = self.model(batch)
+        return z
+
+    def load_config(self, file_path, section, defaults={"slide_model_path": "", "device": "cpu"}):
+        """加载指定 section 的配置，并返回 dict，使用 defaults 补全缺失值"""
+        defaults = defaults or {}
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"Config file not found: {file_path}")
+        
+        with open(file_path, "r") as f:
+            config = yaml.safe_load(f) or {}
+        section_cfg = config.get(section, {})
+        return section_cfg
+    
+    def encode_slide(self, loader, device):
+        pass
+      
+    @abstractmethod
+    def _build(self, **build_kwargs):
+        """
+        Initialization method, must be defined in child class.
+        """
         pass

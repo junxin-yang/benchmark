@@ -1,5 +1,6 @@
 PRISM:
-  model_path: "/data/case_level/open_source_model/model/Prism/pytorch_model.bin"
+  patch_encoder: "virchow_v1"
+  slide_model_path: "/data/open_source_FD_Model/model/Prsim"
   segmenter: "hest"
   mag: 20
   patch_size: 224
@@ -8,30 +9,64 @@ PRISM:
   slide_encoder: "prism"
   device: "cuda"
 
-CONCH:
-  model_path: "/data/case_level/open_source_model/model/conch/pytorch_model.bin"
+CONCH_V1:
+  patch_encoder_module: "conch_v1"
+  patch_encoder_class: "CONCH_V1"
+  patch_model_path: "/data/open_source_FD_Model/model/conch/pytorch_model.bin"
   mag: 20
+  encode_batch_size: 1024
+  encode_workers_num: 8
   patch_size: 224
   overlap: 0
-  device: "cuda"
+  device: "cuda:6"
 
-UNI:
-  model_path: "/data/case_level/open_source_model/model/uni/pytorch_model.bin"
+UNI_V1:
+  patch_encoder_module: "uni_v1"
+  patch_encoder_class: "UNI_V1"
+  patch_model_path: "/data/open_source_FD_Model/model/uni/pytorch_model.bin"
   mag: 20
+  encode_batch_size: 1024
+  encode_workers_num: 8
   patch_size: 224
   overlap: 0
-  device: "cuda"
+  device: "cuda:5"
 
 TITAN:
-  model_path: "/data/case_level/open_source_model/model/Titan/pytorch_model.bin"
+  patch_encoder: "conch_v1"
+  slide_model_path: "/data/open_source_FD_Model/model/titan"
   mag: 20
   patch_size: 224
   overlap: 0
+  patch_encoder: "conch_v15"
+  slide_encoder: "titan"
   device: "cuda"
 
-Virchow:
-  model_path: "/data/case_level/open_source_model/model/Virchow/pytorch_model.bin"
+Virchow_V1:
+  patch_encoder_module: "virchow_v1"
+  patch_encoder_class: "Virchow_V1"
+  patch_model_path: "/data/open_source_FD_Model/model/Virchow/pytorch_model.bin"
+  mag: 20
+  encode_batch_size: 512
+  encode_workers_num: 8
+  patch_size: 224
+  overlap: 0
+  device: "cuda:4"
+
+CTransPath:
+  patch_encoder_module: "ctranspath"
+  patch_encoder_class: "CTransPath"
+  patch_model_path: "/data/open_source_FD_Model/model/CTransPath/ctranspath.pth"
   mag: 20
   patch_size: 224
   overlap: 0
-  device: "cuda"
+  device: "cuda:7"
+
+ProvGigaPath:
+  patch_encoder_module: "prov_gigapath"
+  patch_encoder_class: "ProvGigaPath"
+  patch_model_path: "/data/open_source_FD_Model/model/prov-gigapath/pytorch_model.bin"
+  slide_model_path: "/data/open_source_FD_Model/model/prov-gigapath/slide_encoder.pth"
+  mag: 20
+  patch_size: 224
+  overlap: 0
+  device: "cuda:3"
