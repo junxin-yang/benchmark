@@ -14,7 +14,7 @@ import yaml
 project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 config_path = os.path.join(project_root, "configs", "models.yaml")
 
-class GigaPathSlideEncoder(BaseSlideModel):
+class ProvGigaPath_slide(BaseSlideModel):
 
     def __init__(self, **build_kwargs):
         """
@@ -47,7 +47,7 @@ class GigaPathSlideEncoder(BaseSlideModel):
             
             try:
                 model = create_model(self.weights_path, "gigapath_slide_enc12l768d", 1536, global_pool=True, device=self.device)
-                print(f"🚁Loaded GigaPath Slide Encoder model weights from {self.weights_path}")
+                print(f"🚁  ==>Loaded GigaPath Slide Encoder model weights from {self.weights_path}")
             except:
                 model = create_model("hf_hub:prov-gigapath/prov-gigapath", "gigapath_slide_enc12l768d", 1536, global_pool=True)
                 print("🚁Downloaded GigaPath Slide Encoder model weights from HuggingFace Hub")
@@ -60,16 +60,16 @@ class GigaPathSlideEncoder(BaseSlideModel):
         return model, precision, embedding_dim
 
     def forward(self, batch, device='cuda'):
-        device = self.device if self.device else device
         self.model.tile_size = batch['attributes']['patch_size_level0']
-        z = self.model(batch['features'].to(device), batch['coords'].to(device), all_layer_embed=True)[11]
+        with torch.cuda.amp.autocast(dtype=torch.float16):
+            z = self.model(batch['embeddings'].to(device), batch['coords'].to(device), all_layer_embed=True)[11]
         return z
     
 
 if __name__ == "__main__":
-    model = GigaPathSlideEncoder(pretrained=True)
+    model = ProvGigaPath_slide(pretrained=True)
     dummy_input = {
-        'features': torch.randn(1, 50, 1536),  # batch_size=1, tile_seq_len=50, tile_embed_dim=1536
+        'embeddings': torch.randn(1, 50, 1536),  # batch_size=1, tile_seq_len=50, tile_embed_dim=1536
         'coords': torch.randint(0, 20000, (1, 50, 2), dtype=torch.long),      # batch_size=1, tile_seq_len=50, coord_dim=2
         'attributes': {'patch_size_level0': 512}
     }

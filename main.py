@@ -2,12 +2,13 @@ import yaml
 import json
 import torch
 import torch.nn as nn
-from models.patch_models import CONCH, UNI, PRISM, TITAN
-from datasets import TCGA_BRCA, CustomDataset, Camelyon17_WILDS
-from tasks import ClassificationTask, ReportGenerationTask, SurvivalPredictionTask
-from utils.visualizer import plot_bar
-from utils.metrics import acc, precision, recall, f1, auc, bleu, c_index, auc_survival
-from utils.logger import default_logger as logger
+from models.patch_models import conch_v1, conch_v15, ctranspath, uni_v1, virchow_v1, prov_gigapath
+from models.slide_models import prism, titan, prov_gigapath_slide, abmil
+from datasets import tcga_brca
+# from tasks import ClassificationTask, ReportGenerationTask, SurvivalPredictionTask
+# from utils.visualizer import plot_bar
+# from utils.metrics import acc, precision, recall, f1, auc, bleu, c_index, auc_survival
+# from utils.logger import default_logger as logger
 
 
 from core.base_dataset import BaseDataset
@@ -179,4 +180,56 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    dataset = tcga_brca.TCGA_BRCA("Virchow_V1", check_feature=False)
+    model = prism.PRISM()
+
+    # test
+    test_dir = "/data/slide_files/nas/vol2/Share_Files/test_data/"
+    test_slide = os.listdir(test_dir)
+    for sample in test_slide:
+        print( sample )
+        sample = os.path.join(test_dir, sample)
+        sample = torch.load(sample, map_location="cuda:7")
+        sample = {"embeddings": sample}
+        # report = model.generate_report(sample, device="cuda:7",
+        #                       prompt="Diagnosis: ")
+        # print(report)
+        # report = model.generate_report(sample, device="cuda:7",
+        #                       prompt="Does this specimen show Atrophy? Answer:")
+        # print(report)
+        # report = model.generate_report(sample, device="cuda:7",
+        #                       prompt="Does this specimen show Intestinal metaplasia? Answer:")
+        # print(report)
+        class_prompt_huodong = {
+            "positive": [
+                            "Active chronic gastritis with neutrophilic infiltration.",
+                            "Chronic gastritis showing active inflammation.",
+                            "Neutrophils infiltrating gastric epithelium.",
+                            "Active inflammation in gastric mucosa.",
+                            "Chronic active gastritis."
+                        ],
+            "negative": [
+                            "Inactive chronic gastritis without neutrophilic activity.",
+                            "Chronic gastritis without active inflammation.",
+                            "No neutrophilic infiltration in gastric mucosa.",
+                            "Chronic inflammation without activity.",
+                            "Inactive gastritis."
+                        ]
+        }
+        class_prompt_polyp = {
+            "fundic_gland_polyp": [
+                            "Diagnosis: Fundic gland polyp.",
+                            "Histopathological diagnosis: Fundic gland polyp of the stomach.",
+                        ],
+            "hyperplastic_polyp": [
+                            "Diagnosis: Gastric hyperplastic polyp.",
+                            "Histopathological diagnosis: Hyperplastic polyp of the stomach.",
+                        ],
+            "other_polyp": [
+                            "Diagnosis: Other type of gastric polyp.",
+                            "Histopathological diagnosis: Gastric polyp not otherwise specified.",
+                        ]
+        }
+        scores = model.zero_shot(sample, class_prompt=class_prompt_polyp, device="cuda:7")
+        print(scores)

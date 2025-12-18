@@ -9,14 +9,20 @@ class SingleWSIDataset(Dataset):
         self.slide = openslide.open_slide(slide_path)
         self.transform = transform
         
-        # 获取放大倍数
-        if 'mirax.GENERAL.OBJECTIVE_MAGNIFICATION' in self.slide.properties:
-            self.mag = int(self.slide.properties['mirax.GENERAL.OBJECTIVE_MAGNIFICATION'])
-        elif 'aperio.AppMag' in self.slide.properties:
-            self.mag = int(self.slide.properties['aperio.AppMag'])
-        else:
-            self.mag = 20
-            print('==> Cannot Find WSI MAGNIFICATION Parameter, SET mag=20!')
+
+        try:
+            self.mpp = (float(self.slide.properties['openslide.mpp-x']) + float(self.slide.properties['openslide.mpp-y'])) / 2.0
+        except KeyError:
+            print(f"Warning: MPP information not found in slide properties for {slide_path}. Setting default mpp to 0.25")
+            self.mpp = 0.25
+        self.thresholds = {
+            40.0: 0.25,  # μm/pixel
+            20.0: 0.50,
+            10.0: 1.00,
+        }
+        est_mag  = 40 * (0.25 / self.mpp)  # assume 40x is 0.25 mpp
+        self.mag = min(self.thresholds.keys(), key=lambda k: abs(est_mag - k))
+
         
         # 根据放大倍数选择读取层级
         if self.mag == 20:

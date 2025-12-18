@@ -17,3 +17,41 @@ TCGA-TIL:
 TCGA-BRCA:
   data_root: "/data/slide_files/nas/vol2/Public_Data/benchmark/"
   slide_file_path: "/data/slide_files/nas/vol2/Public_Data/TCGA/TCGA-BRCA"
+  tasks:
+    classification:
+      TCGA_BRCA_2class:
+        num_classes: 2
+        patch_model:
+          epochs: 20
+          batch_size: 1
+          learning_rate: 1e-4
+          loss_fn: "CrossEntropyLoss"
+          optimizer: "AdamW"
+          scheduler: "CosineAnnealingLR"
+        slide_model:
+          epochs: 500
+          batch_size: 1
+          loss_fn: "CrossEntropyLoss"
+          optimizer: "LBFGS"
+
+
+
+
+TCGA-LUAD:
+  data_root: "/data/slide_files/nas/vol2/Public_Data/benchmark/"
+  slide_file_path: "/data/slide_files/nas/vol2/Public_Data/TCGA/LUAD"
+
+
+TCGA-LUSC:
+  data_root: "/data/slide_files/nas/vol2/Public_Data/benchmark/"
+  slide_file_path: "/data/slide_files/nas/vol2/Public_Data/TCGA/LUSC"
+
+
+Camelyon16:
+  data_root: "/data/slide_files/nas/vol2/Public_Data/benchmark/"
+  slide_file_path: "/data/slide_files/nas/vol2/Public_Data/CAMELYON16"
+
+
+zhongshan:
+  data_root: "/data/slide_files/nas/vol2/Public_Data/benchmark/"
+  slide_file_path: "/data/slide_files/nas/vol2/Public_Data/TCGA/LUAD"

@@ -25,7 +25,7 @@ class BioGPT(nn.Module):
         commit_hash = 'eb0d815e95434dc9e3b78f464e52b899bee7d923'
         self.tokenizer = enforce_type(
             BioGptTokenizer,
-            BioGptTokenizer.from_pretrained('microsoft/biogpt', revision=commit_hash),
+            BioGptTokenizer.from_pretrained('/data/open_source_FD_Model/model/biogpt', revision=commit_hash),
         )
 
         self.text_dim = enforce_type(

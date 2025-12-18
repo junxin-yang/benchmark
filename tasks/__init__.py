@@ -1,5 +1,5 @@
-from .classification import ClassificationTask
+from .slide_classification import Slide_ClassificationTask
 from .report_generation import ReportGenerationTask
 from .survival_prediction import SurvivalPredictionTask
 
-__all__ = [ClassificationTask, ReportGenerationTask, SurvivalPredictionTask]
+__all__ = [Slide_ClassificationTask, ReportGenerationTask, SurvivalPredictionTask]

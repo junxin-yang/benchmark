@@ -32,16 +32,18 @@ class TITAN(BaseSlideModel):
 
         try:
             model = AutoModel.from_pretrained(self.weights_path, trust_remote_code=True)
-            print(f"🚁Loaded TITAN model weights from {self.weights_path}")
-        except:
+            print(f"🚁  ==>Loaded TITAN model weights from {self.weights_path}")
+        except Exception as e:
+            print(e)
             model = AutoModel.from_pretrained('MahmoodLab/TITAN', trust_remote_code=True)
             print("🚁Downloaded TITAN model weights from HuggingFace Hub")
         precision = torch.float16
         embedding_dim = 768
         return model, precision, embedding_dim
 
-    def forward(self, batch, device='cuda'):
-        z = self.model.encode_slide_from_patch_features(batch['features'].to(device), batch['coords'].to(device), batch['attributes']['patch_size_level0'])        
+    def forward(self, batch, device='cpu'):
+        self.model.to(device)
+        z = self.model.encode_slide_from_patch_features(batch['embeddings'].to(device), batch['coords'].to(device), batch['attributes']['patch_size_level0'])        
         return z
 
     def classify(self, feature, num_classes):

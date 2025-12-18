@@ -3,6 +3,7 @@ import os
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PROJECT_ROOT)
 import torch
+from torch import einsum
 import traceback
 from abc import abstractmethod
 from einops import rearrange
@@ -48,13 +49,14 @@ class PRISM(BaseSlideModel):
 
         if self.weights_path:
             try:
-                from model_zoo.prism.perceiver import PerceiverResampler
-                from model_zoo.prism.biogpt import BioGPT
-                from model_zoo.prism.configuring_prism import PrismConfig
-                from model_zoo.prism.modeling_prism import Prism
+                from models.slide_models.model_zoo.prism.perceiver import PerceiverResampler
+                from models.slide_models.model_zoo.prism.biogpt import BioGPT
+                from models.slide_models.model_zoo.prism.configuring_prism import PrismConfig
+                from models.slide_models.model_zoo.prism.modeling_prism import Prism
                 self.prism_config = PrismConfig.from_pretrained(self.weights_path)
                 model = self.prism_model = Prism.from_pretrained(self.weights_path, config=self.prism_config)
-                print(f"🚁Loaded PRISM model weights from {self.weights_path}")
+                model = model.to(self.device)
+                print(f"🚁  ==>Loaded PRISM model weights from {self.weights_path}")
             except:
                 traceback.print_exc()
                 raise Exception(
@@ -66,93 +68,91 @@ class PRISM(BaseSlideModel):
                 model = AutoModel.from_pretrained('paige-ai/Prism', trust_remote_code=True)
             else:
                 model = AutoModel.from_config(AutoConfig.from_pretrained('paige-ai/Prism'))
-        model.text_decoder = None
         precision = torch.float16
         embedding_dim = 1280
         return model, precision, embedding_dim
     
     def forward(self, batch, device='cuda'):
         # input should be of shape (batch_size, tile_seq_len, tile_embed_dim)
-        x = batch['features'].to(device)
+        x = batch["embeddings"].to(device)
         z = self.model.slide_representations(x)
         z = z['image_embedding'] 
         return z
 
-    def classify(self, feature, num_classes):
-        import random
-        pred_class = random.randint(0, num_classes - 1)
-        probs = [random.random() for _ in range(num_classes)]
-        total = sum(probs)
-        probs = [p / total for p in probs]
-        return {"pred_class": pred_class, "probabilities": probs}
+    def generate_report(self, batch, device='cuda', prompt: Optional[str]=None):
+        """
+        generate_report 的 Docstring
         
-        # embedding_data = torch.load(feature)
-        # tile_embeddings = embedding_data['embeddings'].unsqueeze(0).to(self.device)
-
-        # with torch.autocast(self.device, torch.float16), torch.inference_mode():
-        #     logits = self.model.classify(tile_embeddings)
-        #     probs = torch.softmax(logits, dim=-1)
-        #     pred_class = torch.argmax(probs, dim=-1).item()
-        # return {"pred_class": pred_class, "probabilities": probs.squeeze().tolist()}
-
-    def survival_predict(self, feature, time_horizon=None):
+        :param self: 
+        :param batch: 加载的virchow_v1的一个batch数据
+        :param device: 放在哪个设备上运行
+        :param prompt: 生成报告时的提示语
+        :return: 生成的报告
         """
-        Survival prediction.
-        Args:
-            feature: input features for prediction
-            time_horizon: optional, predict survival at a specific time point
-        Returns:
-            Survival probability or risk score
+        x = batch["embeddings"].unsqueeze(0).to(device)
+        z = self.model.slide_representations(x)
+        if prompt is not None:
+            prompt_ids = self.model.tokenize([prompt]).to(device)
+        else:
+            prompt_ids = None
+        generated_embedding = self.model.generate(
+            inputs = prompt_ids,
+            key_value_states=z['image_latents'],
+            do_sample=False,
+            num_beams=5,
+            num_beam_groups=1,
+        )
+        generated_caption = self.model.untokenize(generated_embedding)
+        return generated_caption
+    
+    def zero_shot(self, batch, class_prompt: dict[str, list[str]], device='cuda'):
         """
-        import random
-        risk_score = random.random()
-        return {"risk_score": risk_score}
+        zero_shot 的 Docstring
+        
+        :param self: 
+        :param batch: 加载的virchow_v1的一个batch数据
+        :param class_prompt: zero-shot分类的提示语
+        :type class_prompt: dict[str, list[str]]
+        :param device: 使用的设备
+        :return: 分类得分
+        """
+        x = batch["embeddings"].unsqueeze(0).to(device)
+        image_embedding = self.model.slide_representations(x)['image_embedding']
+        
+        # zero-shot prompts
+        zero_shot_prompts = [p for lst in class_prompt.values() for p in lst]
+        zero_shot_token_ids = self.model.tokenize(zero_shot_prompts)[:, :-1].to(device)
+        dummy_image_latents = torch.empty(
+            (len(zero_shot_prompts), 1, self.model.text_decoder.context_dim), device=device
+        )
+        decoder_out = self.model.text_decoder(zero_shot_token_ids, dummy_image_latents)
+    
+        # zero-shot probabilities
+        text_proj = self.model.text_to_latents(decoder_out['text_embedding'])
+        image_proj = self.model.img_to_latents(image_embedding)
 
-        # embedding_data = torch.load(feature)
-        # tile_embeddings = embedding_data['embeddings'].unsqueeze(0).to(self.device)
+        sim = einsum('i d, j d -> i j', image_proj, text_proj)  # (image, text)
+        sim = sim * self.model.temperature.exp()
 
-        # with torch.autocast(self.device, torch.float16), torch.inference_mode():
-        #     if hasattr(self.model, "survival_predict"):
-        #         result = self.model.survival_predict(tile_embeddings, time_horizon)
-        #     else:
-        #         logits = self.model.classify(tile_embeddings)
-        #         probs = torch.softmax(logits, dim=-1)
-        #         result = 1 - probs.max().item() 
+        assert sim.shape[0] == len(image_embedding)
+        assert sim.shape[1] == len(zero_shot_prompts)
 
-        # return {"risk_score": result}
+        zero_shot_probs = torch.softmax(sim.to(torch.float), dim=-1)
+        
+        # 对概率进行分割
+        lengths = [len(lst) for lst in class_prompt.values()]
+        split_probs = torch.split(zero_shot_probs, lengths, dim=1)
+        class_probs = torch.stack([p.sum(dim=1) for p in split_probs], dim=1)
 
-    def report_generate(self, feature):
+        result = {}
+        for i, key in enumerate(class_prompt.keys()):
+            # 取出第 i 个类别的概率（假设 batch_size=1，取第 0 个元素）
+            result[key] = class_probs[0, i].item()
+        return result
 
-        import random
-        # 随机生成一个假报告字符串
-        fake_reports = [
-            "No significant abnormality detected.",
-            "Possible malignancy observed in the sample.",
-            "Inflammatory changes present.",
-            "Sample insufficient for diagnosis.",
-            "Benign tissue identified."
-        ]
-        return random.choice(fake_reports)
-        # embedding_data = torch.load(feature)
-        # tile_embeddings = embedding_data['embeddings'].unsqueeze(0).to(self.device)
-
-        # with torch.autocast(self.device, torch.float16), torch.inference_mode():
-        #     reprs = self.model.slide_representations(tile_embeddings)
-
-        # with torch.autocast('cuda', torch.float16), torch.inference_mode():
-        #     genned_ids = self.model.generate(
-        #         key_value_states=reprs['image_latents'],
-        #         do_sample=False,
-        #         num_beams=5,
-        #         num_beam_groups=1,
-        #     )
-        #     genned_caption = self.model.untokenize(genned_ids)
-        # return genned_caption
-
+        
 if __name__ == "__main__":
     model = PRISM(pretrained=False)
-    dummy_input = {
-        'features': torch.randn(1, 50, 2560)  # batch_size=2, tile_seq_len=50, tile_embed_dim=1280
-    }
+    dummy_input = torch.randn(1, 50, 2560)  # batch_size=2, tile_seq_len=50, tile_embed_dim=1280
     output = model.forward(dummy_input, device='cpu')
     print("Output shape:", output.shape)  # Expected: (2, 1280)

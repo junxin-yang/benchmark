@@ -2,6 +2,8 @@ import os
 import sys
 import torch
 from typing import Any, List, Optional
+import pandas as pd
+import yaml
 import glob
 from torch.utils.data import Dataset
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -9,12 +11,8 @@ sys.path.append(PROJECT_ROOT)
 from core.base_dataset import BaseDataset
 
 
-class TCGA_BRCA(BaseDataset):
-    """
-    TCGA-BRCA数据集类，继承自BaseDataset。
-    supported_tasks: 支持的下游任务列表，例如["classification", "segmentation"]等。
-    check_feature: 是否在初始化时检查预处理特征文件的存在性。
-    """
+class TCGA_LUAD(BaseDataset):
+
     def __init__(
             self,
             model: str,
@@ -22,37 +20,24 @@ class TCGA_BRCA(BaseDataset):
             check_feature: bool = True,
             **kwargs: Any,
     ):
-        self.dataset_name = "TCGA-BRCA"
+        self.dataset_name = "TCGA-LUAD"
         self.model = model
         self.supported_tasks = supported_tasks
         self.check_feature = check_feature
         super().__init__(**kwargs)
         self.slides = glob.glob(os.path.join(self.slide_dir, "*", "*.svs"))
 
-        # 过滤掉没有对应标签的slide
-        valid_slides = []
-        for slide in self.slides:
-            slide_name = os.path.basename(slide)
-            ok = True
-            for task_name, label_csv in self.total_labels.items():
-                if not (label_csv["slide_name"] == slide_name).any():
-                    ok = False
-                    break
-            if ok:
-                valid_slides.append(slide)
-        self.slides = valid_slides
-
         # 记载数据集有的所有下游任务的标签，假设所有标签都是两列：| slide_name | , | label |
         # 这样加载就可以动态的根据supported_tasks加载不同数量的label
-
         if self.check_feature:
             self._build()
+
 
     
             
 
 if __name__ == "__main__":
-    models = ["UNI_V1", "CONCH_V1", "CONCH_V15", "CTransPath", "Virchow_V1", "ProvGigaPath"]
-    dataset = TCGA_BRCA("PRISM", check_feature=False)
-    for sample in dataset:
-        print(sample)
+    models = ["UNI_V1", "CONCH_V1", "CTransPath", "Virchow_V1", "ProvGigaPath"]
+    dataset = TCGA_LUAD("CONCH_V15", label_load=False)
+    # for sample in dataset:
+    #     print(sample)
