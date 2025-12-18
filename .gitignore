@@ -6,4 +6,5 @@ logs/
 *.jpg
 *.pyc
 test.py
+model_download.py
 test2.py
